@@ -1,0 +1,72 @@
+.scroll-to-top {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(79, 127, 241, 0.18);
+  border-radius: var(--radius-medium);
+  background-color: var(--background-blue);
+  color: var(--dark-primary-blue);
+  font-size: 15px;
+  cursor: pointer;
+  z-index: 999;
+  overflow: hidden;
+  box-shadow: 0 5px 18px rgba(79, 127, 241, 0.16);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, background-color 0.35s ease;
+}
+
+.scroll-shine {
+  position: absolute;
+  top: -20%;
+  left: -80%;
+  width: 45%;
+  height: 140%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75), transparent);
+  transform: skewX(-20deg);
+  opacity: 0;
+}
+
+.scroll-to-top:hover {
+  background-color: #e4efff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(79, 127, 241, 0.24);
+}
+
+.scroll-to-top:hover .scroll-shine {
+  opacity: 1;
+  animation: scrollShine 0.8s ease;
+}
+
+.scroll-to-top i {
+  position: relative;
+  z-index: 2;
+  transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+.scroll-to-top:hover i {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 0 4px rgba(79, 127, 241, 0.35));
+}
+
+@keyframes scrollShine {
+  from {
+    left: -80%;
+  }
+  to {
+    left: 140%;
+  }
+}
+
+@media (max-width: 768px) {
+  .scroll-to-top {
+    right: 18px;
+    bottom: 18px;
+    width: 40px;
+    height: 40px;
+    font-size: 13px;
+  }
+}

@@ -1,0 +1,52 @@
+:root {
+    --primary-blue: #4F7FF1;
+    --dark-primary-blue: #3569D4;
+
+    --button-blue: #4F7FF1;
+    --button-dark-blue: #3569D4;
+
+    --black: #111827;
+    --white: #FFFFFF;
+
+    --grey: #F5F8FB;
+    --dark-grey: #E2E8F0;
+
+    --heading-color: #111827;
+    --heading-blue: #3569D4;
+
+    --text-color: #1F2937;
+    --text-color-grey: #64748B;
+    --text-color-light-grey: #94A3B8;
+
+    --background-white: #FFFFFF;
+    --background-gray: #F5F8FB;
+
+    --background-blue: #EEF5FF;
+    --background-light-blue: #F7FAFF;
+
+    --background-dark: #111827;
+    --background-dark-light: #172033;
+
+    --hover-blue: #E8F0FF;
+    --hover-dark-blue: #3569D4;
+
+    --hover-gray: #F1F5F9;
+    --hover-text-blue: #3569D4;
+
+    --border-color: #E2E8F0;
+    --border-light: #EDF1F6;
+    --border-blue: #D5E3FF;
+
+    --shadow-light: 0 4px 15px rgba(15, 23, 42, 0.05);
+    --shadow-card: 0 8px 25px rgba(15, 23, 42, 0.07);
+    --shadow-blue: 0 8px 25px rgba(79, 127, 241, 0.20);
+
+    --success: #22C55E;
+    --warning: #F59E0B;
+    --error: #EF4444;
+    
+    --radius-small: 6px;
+    --radius-medium: 10px;
+    --radius-large: 16px;
+    --radius-round: 50%;
+}

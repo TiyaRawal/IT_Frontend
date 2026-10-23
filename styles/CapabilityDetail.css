@@ -1,0 +1,884 @@
+.capability-detail-page {
+    width: 100%;
+    max-width: 100%;
+    min-height: 100vh;
+    overflow-x: clip;
+    background: var(--white);
+    color: var(--heading-color);
+}
+
+.capability-detail-page *,
+.capability-status * {
+    box-sizing: border-box;
+}
+
+.capability-detail-page a {
+    text-decoration: none;
+}
+
+.capability-hero {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    padding: 64px 5%;
+    overflow: hidden;
+    background-image: linear-gradient(90deg, rgba(7, 14, 28, .84) 0%, rgba(9, 20, 39, .72) 48%, rgba(5, 16, 31, .54) 100%),
+        url("https://res.cloudinary.com/yetzgheo/image/upload/v1792573068/CapabilityBG_ghou8o.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.capability-hero-container {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+    align-items: center;
+    gap: 38px;
+    width: 100%;
+    max-width: 1240px;
+    min-width: 0;
+    margin: 0 auto;
+}
+
+.capability-hero-content {
+    width: 100%;
+    min-width: 0;
+    max-width: 720px;
+}
+
+.capability-label {
+    display: inline-block;
+    margin-bottom: 18px;
+    color: #a9c8ff;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    line-height: 1.6;
+}
+
+.capability-hero-content h1 {
+    margin: 0 0 15px;
+    color: var(--white);
+    font-size: clamp(34px, 3.7vw, 54px);
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -1.2px;
+    overflow-wrap: anywhere;
+}
+
+.capability-hero-content h2 {
+    margin: 0 0 20px;
+    color: #7da7ff;
+    font-size: clamp(20px, 2.25vw, 30px);
+    font-weight: 700;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+}
+
+.capability-hero-description {
+    max-width: 680px;
+    margin: 0;
+    color: rgba(255, 255, 255, .82);
+    font-size: 15px;
+    line-height: 1.9;
+}
+
+.capability-primary-btn,
+.capability-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 13px;
+    padding: 14px 23px;
+    border: 1px solid #4e7df5;
+    border-radius: 9px;
+    background: #4e7df5;
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 700;
+    transition: transform .25s ease, background .25s ease, box-shadow .25s ease;
+}
+
+.capability-primary-btn {
+    margin-top: 27px;
+}
+
+.capability-primary-btn:hover {
+    transform: translateY(-2px);
+    background: #3566df;
+    border-color: #3566df;
+    color: var(--white);
+    box-shadow: 0 10px 26px rgba(43, 100, 225, .28);
+}
+
+.capability-primary-btn i,
+.capability-cta-btn i {
+    transition: transform .25s ease;
+}
+
+.capability-primary-btn:hover i,
+.capability-cta-btn:hover i {
+    transform: translateX(4px);
+}
+
+.capability-hero-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-width: 0;
+    min-height: 330px;
+}
+
+.capability-visual-circle {
+    position: absolute;
+    border: 1px solid rgba(112, 177, 255, .55);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.circle-one {
+    width: 300px;
+    height: 300px;
+}
+
+.circle-two {
+    width: 235px;
+    height: 235px;
+    border-style: dashed;
+    opacity: 0.65;
+}
+
+.capability-visual-card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 350px;
+    min-width: 0;
+    padding: 29px;
+    border: 1px solid rgba(255, 255, 255, .72);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, .96);
+    box-shadow: 0 22px 55px rgba(0, 0, 0, .24);
+}
+
+.capability-visual-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 62px;
+    height: 62px;
+    margin-bottom: 22px;
+    border-radius: 15px;
+    background: var(--primary-blue);
+    color: var(--white);
+    font-size: 25px;
+}
+
+.capability-visual-card h3 {
+    margin: 0 0 12px;
+    color: #151d2d;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.capability-visual-card>p {
+    margin: 0;
+    color: #61758d;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.capability-visual-divider {
+    height: 1px;
+    margin: 22px 0 16px;
+    background: #e8eef5;
+}
+
+.capability-visual-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    color: #61758d;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.capability-visual-bottom i {
+    flex-shrink: 0;
+    color: var(--primary-blue);
+}
+
+.capability-services {
+    width: 100%;
+    padding: 70px 5%;
+    background: var(--white);
+}
+
+.capability-services-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.capability-section-heading {
+    max-width: 720px;
+    margin: 0 auto 40px;
+    text-align: center;
+}
+
+.capability-section-heading .capability-label {
+    margin-bottom: 12px;
+    color: var(--primary-blue);
+}
+
+.capability-section-heading h2 {
+    margin: 0 0 14px;
+    color: #182235;
+    font-size: clamp(27px, 3vw, 38px);
+    font-weight: 800;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+}
+
+.capability-section-heading h2 span {
+    color: var(--primary-blue);
+}
+
+.capability-section-heading>p {
+    max-width: 620px;
+    margin: 0 auto;
+    color: #718096;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.capability-services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.capability-service-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 210px;
+    padding: 26px;
+    border: 1px solid #e7edf5;
+    border-radius: 14px;
+    background: var(--white);
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+
+.capability-service-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    border-radius: 14px 14px 0 0;
+    background: var(--primary-blue);
+    transition: width .3s ease;
+}
+
+.capability-service-card:hover {
+    transform: translateY(-4px);
+    border-color: #c7dcf4;
+    box-shadow: 0 12px 28px rgba(26, 48, 79, .08);
+}
+
+.capability-service-card:hover::before {
+    width: 100%;
+}
+
+.capability-service-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    margin-bottom: 20px;
+    border-radius: 13px;
+    background: #edf5ff;
+    color: var(--primary-blue);
+    font-size: 21px;
+    transition: .25s ease;
+}
+
+.capability-service-card:hover .capability-service-icon {
+    background: var(--primary-blue);
+    color: var(--white);
+}
+
+.capability-service-card h3 {
+    margin: 0 0 10px;
+    color: #1c2738;
+    font-size: 19px;
+    font-weight: 750;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+}
+
+.capability-service-card>p {
+    margin: 0 0 20px;
+    color: #748399;
+    font-size: 14px;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+.capability-service-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 15px;
+    border-top: 1px solid #edf0f5;
+    color: #6d8098;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.capability-service-bottom i {
+    color: var(--primary-blue);
+    transition: transform .25s ease;
+}
+
+.capability-service-card:hover .capability-service-bottom i {
+    transform: translateX(4px);
+}
+
+.capability-empty-services {
+    color: #718096;
+    text-align: center;
+    line-height: 1.8;
+}
+
+.capability-cta-section {
+    width: 100%;
+    padding: 0 5% 65px;
+}
+
+.capability-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 36px 40px;
+    border-radius: 15px;
+    background: linear-gradient(120deg, #245f94, var(--primary-blue));
+}
+
+.capability-cta-content {
+    min-width: 0;
+    max-width: 700px;
+}
+
+.capability-cta .capability-label {
+    margin-bottom: 12px;
+    color: #e0edfa;
+}
+
+.capability-cta h2 {
+    margin: 0 0 12px;
+    color: var(--white);
+    font-size: clamp(25px, 2.8vw, 34px);
+    font-weight: 800;
+    line-height: 1.3;
+}
+
+.capability-cta p {
+    margin: 0;
+    color: #e0edfa;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.capability-cta-btn {
+    flex-shrink: 0;
+    border-color: var(--white);
+    background: var(--white);
+    color: #28679f;
+}
+
+.capability-cta-btn:hover {
+    transform: translateY(-2px);
+    border-color: #edf5ff;
+    background: #edf5ff;
+    color: #245d8d;
+}
+
+.capability-status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 60vh;
+    padding: 30px 20px;
+    background: #f5f8fc;
+    text-align: center;
+}
+
+.capability-loader {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 18px;
+    border: 4px solid #dce8f8;
+    border-top-color: var(--primary-blue);
+    border-radius: 50%;
+    animation: capabilitySpin .8s linear infinite;
+}
+
+.capability-status h2 {
+    color: #182235;
+}
+
+.capability-status p {
+    color: #718096;
+    line-height: 1.7;
+}
+
+.capability-status .capability-primary-btn {
+    margin-top: 15px;
+}
+
+@keyframes capabilitySpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 1024px) {
+    .capability-hero {
+        padding: 50px 4%;
+    }
+
+    .capability-hero-container {
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+        gap: 22px;
+    }
+
+    .capability-hero-content h1 {
+        font-size: clamp(32px, 4vw, 44px);
+    }
+
+    .capability-hero-content h2 {
+        font-size: clamp(20px, 2.5vw, 26px);
+    }
+
+    .capability-hero-description {
+        font-size: 14px;
+    }
+
+    .capability-hero-visual {
+        min-height: 280px;
+    }
+
+    .capability-visual-card {
+        padding: 22px;
+    }
+
+    .circle-one {
+        width: 250px;
+        height: 250px;
+    }
+
+    .circle-two {
+        width: 200px;
+        height: 200px;
+    }
+
+    .capability-services {
+        padding: 55px 4%;
+    }
+
+    .capability-services-grid {
+        gap: 18px;
+    }
+
+    .capability-service-card {
+        padding: 22px;
+    }
+
+    .capability-cta-section {
+        padding: 0 4% 50px;
+    }
+
+    .capability-cta {
+        padding: 30px;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .capability-hero {
+        padding: 42px 5%;
+        background-position: center;
+    }
+
+    .capability-hero-container {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 25px;
+    }
+
+    .capability-hero-content {
+        max-width: 100%;
+    }
+
+    .capability-label {
+        margin-bottom: 13px;
+        font-size: 10px;
+        letter-spacing: 1.5px;
+    }
+
+    .capability-hero-content h1 {
+        font-size: clamp(32px, 6vw, 44px);
+        line-height: 1.15;
+    }
+
+    .capability-hero-content h2 {
+        font-size: clamp(20px, 4vw, 26px);
+        line-height: 1.4;
+    }
+
+    .capability-hero-description {
+        font-size: 13px;
+        line-height: 1.8;
+    }
+
+    .capability-primary-btn {
+        margin-top: 20px;
+    }
+
+    .capability-hero-visual {
+        min-height: 290px;
+    }
+
+    .capability-visual-card {
+        max-width: 340px;
+        padding: 24px;
+    }
+
+    .circle-one {
+        width: 260px;
+        height: 260px;
+    }
+
+    .circle-two {
+        width: 205px;
+        height: 205px;
+    }
+
+    .capability-services {
+        padding: 48px 5%;
+    }
+
+    .capability-section-heading {
+        margin-bottom: 30px;
+    }
+
+    .capability-section-heading h2 {
+        font-size: clamp(26px, 4.5vw, 34px);
+    }
+
+    .capability-section-heading>p {
+        font-size: 13px;
+    }
+
+    .capability-services-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .capability-service-card {
+        min-height: 200px;
+        padding: 20px;
+    }
+
+    .capability-service-card h3 {
+        font-size: 17px;
+    }
+
+    .capability-service-card>p {
+        font-size: 12px;
+    }
+
+    .capability-service-bottom {
+        font-size: 10px;
+    }
+
+    .capability-cta-section {
+        padding: 0 5% 42px;
+    }
+
+    .capability-cta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 22px;
+        padding: 28px 24px;
+    }
+
+    .capability-cta h2 {
+        font-size: 27px;
+    }
+
+    .capability-cta p {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .capability-hero {
+        padding: 35px 18px;
+        background-position: 58% center;
+    }
+
+    .capability-hero-container {
+        gap: 18px;
+    }
+
+    .capability-label {
+        font-size: 9px;
+        letter-spacing: 1.3px;
+    }
+
+    .capability-hero-content h1 {
+        font-size: clamp(28px, 8vw, 35px);
+        letter-spacing: -0.6px;
+    }
+
+    .capability-hero-content h2 {
+        margin-bottom: 14px;
+        font-size: 20px;
+    }
+
+    .capability-hero-description {
+        font-size: 12px;
+        line-height: 1.8;
+    }
+
+    .capability-primary-btn {
+        width: 100%;
+        gap: 9px;
+        padding: 13px 12px;
+        font-size: 12px;
+    }
+
+    .capability-hero-visual {
+        min-height: 250px;
+    }
+
+    .capability-visual-card {
+        max-width: 310px;
+        padding: 20px;
+        border-radius: 16px;
+    }
+
+    .capability-visual-icon {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 16px;
+        font-size: 20px;
+    }
+
+    .capability-visual-card h3 {
+        font-size: 19px;
+    }
+
+    .capability-visual-card>p {
+        font-size: 12px;
+    }
+
+    .capability-visual-divider {
+        margin: 17px 0 13px;
+    }
+
+    .capability-visual-bottom {
+        font-size: 10px;
+    }
+
+    .circle-one {
+        width: 225px;
+        height: 225px;
+    }
+
+    .circle-two {
+        width: 175px;
+        height: 175px;
+    }
+
+    .capability-services {
+        padding: 40px 18px;
+    }
+
+    .capability-section-heading {
+        margin-bottom: 25px;
+    }
+
+    .capability-section-heading .capability-label {
+        margin-bottom: 9px;
+    }
+
+    .capability-section-heading h2 {
+        font-size: 25px;
+        line-height: 1.3;
+    }
+
+    .capability-section-heading>p {
+        font-size: 12px;
+        line-height: 1.75;
+    }
+
+    .capability-services-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 14px;
+    }
+
+    .capability-service-card {
+        min-height: auto;
+        padding: 20px;
+    }
+
+    .capability-service-icon {
+        width: 44px;
+        height: 44px;
+        margin-bottom: 15px;
+        font-size: 19px;
+    }
+
+    .capability-service-card h3 {
+        font-size: 17px;
+    }
+
+    .capability-service-card>p {
+        margin-bottom: 16px;
+        font-size: 12px;
+        line-height: 1.75;
+    }
+
+    .capability-service-bottom {
+        padding-top: 12px;
+        font-size: 10px;
+    }
+
+    .capability-cta-section {
+        padding: 0 18px 35px;
+    }
+
+    .capability-cta {
+        gap: 18px;
+        padding: 24px 20px;
+        border-radius: 12px;
+    }
+
+    .capability-cta .capability-label {
+        margin-bottom: 9px;
+    }
+
+    .capability-cta h2 {
+        font-size: 23px;
+        line-height: 1.35;
+    }
+
+    .capability-cta p {
+        font-size: 12px;
+        line-height: 1.75;
+    }
+
+    .capability-cta-btn {
+        width: 100%;
+        padding: 13px 14px;
+        font-size: 12px;
+    }
+
+    .capability-status {
+        min-height: 50vh;
+        padding: 25px 16px;
+    }
+
+    .capability-status h2 {
+        font-size: 22px;
+    }
+
+    .capability-status p {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 360px) {
+    .capability-hero {
+        padding: 30px 14px;
+    }
+
+    .capability-hero-content h1 {
+        font-size: 27px;
+    }
+
+    .capability-hero-content h2 {
+        font-size: 18px;
+    }
+
+    .capability-hero-visual {
+        min-height: 225px;
+    }
+
+    .capability-visual-card {
+        padding: 17px;
+    }
+
+    .circle-one {
+        width: 200px;
+        height: 200px;
+    }
+
+    .circle-two {
+        width: 155px;
+        height: 155px;
+    }
+
+    .capability-services {
+        padding: 35px 14px;
+    }
+
+    .capability-service-card {
+        padding: 17px;
+    }
+
+    .capability-cta-section {
+        padding-right: 14px;
+        padding-left: 14px;
+    }
+
+    .capability-cta {
+        padding: 21px 16px;
+    }
+
+    .capability-cta h2 {
+        font-size: 21px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .capability-detail-page *,
+    .capability-detail-page *::before,
+    .capability-detail-page *::after {
+        animation: none ;
+        transition: none ;
+        opacity: 1 ;
+        transform: none ;
+    }
+}

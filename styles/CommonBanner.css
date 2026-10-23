@@ -1,0 +1,203 @@
+.common-banner {
+  width: 100%;
+  min-height: 320px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  isolation: isolate;
+  background-image: url("https://res.cloudinary.com/yetzgheo/image/upload/v1792575257/CommonBanner_se3wie.avif");
+  background-size: cover;
+  background-position: center 55%;
+}
+
+.common-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+      rgba(7, 18, 38, 0.90),
+      rgba(17, 39, 78, 0.70));
+  z-index: -1;
+}
+
+.common-banner-content {
+  width: 82%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 55px 20px;
+  text-align: center;
+  animation: commonBannerContent 0.6s ease;
+}
+
+.common-banner-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin-bottom: 16px;
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.common-banner-label i:first-child {
+  color: #8fb1ff;
+  font-size: 11px;
+}
+
+.common-banner-label i:last-of-type {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 8px;
+}
+
+.common-banner-content h1 {
+  margin: 0;
+  color: var(--white);
+  font-size: clamp(40px, 4.5vw, 56px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.common-banner-line {
+  width: 52px;
+  height: 3px;
+  margin: 20px auto 0;
+  background: var(--primary-blue);
+  border-radius: 10px;
+  box-shadow: 0 0 14px rgba(79, 127, 241, 0.5);
+}
+
+@keyframes commonBannerContent {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1024px) {
+  .common-banner {
+    min-height: 280px;
+    background-position: center 55%;
+  }
+
+  .common-banner-content {
+    width: 90%;
+    padding: 45px 15px;
+  }
+
+  .common-banner-content h1 {
+    font-size: clamp(38px, 5vw, 46px);
+  }
+}
+
+@media (max-width: 768px) {
+  .common-banner {
+    min-height: 240px;
+    background-position: center;
+  }
+
+  .common-banner-content {
+    width: 94%;
+    padding: 38px 12px;
+  }
+
+  .common-banner-label {
+    gap: 7px;
+    margin-bottom: 12px;
+    font-size: 10px;
+    flex-wrap: wrap;
+  }
+
+  .common-banner-label i:first-child {
+    font-size: 10px;
+  }
+
+  .common-banner-label i:last-of-type {
+    font-size: 7px;
+  }
+
+  .common-banner-content h1 {
+    font-size: clamp(30px, 5.5vw, 38px);
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    overflow-wrap: anywhere;
+  }
+
+  .common-banner-line {
+    width: 42px;
+    height: 2px;
+    margin-top: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .common-banner {
+    min-height: 210px;
+    background-position: center;
+  }
+
+  .common-banner-overlay {
+    background: linear-gradient(90deg, rgba(7, 18, 38, 0.92), rgba(17, 39, 78, 0.76));
+  }
+
+  .common-banner-content {
+    width: 100%;
+    padding: 32px 18px;
+  }
+
+  .common-banner-label {
+    gap: 6px;
+    margin-bottom: 10px;
+    font-size: 9px;
+    line-height: 1.6;
+  }
+
+  .common-banner-content h1 {
+    font-size: clamp(26px, 7.5vw, 32px);
+    line-height: 1.2;
+    letter-spacing: -0.3px;
+  }
+
+  .common-banner-line {
+    width: 36px;
+    margin-top: 13px;
+  }
+}
+
+@media (max-width: 360px) {
+  .common-banner {
+    min-height: 190px;
+  }
+
+  .common-banner-content {
+    padding: 28px 14px;
+  }
+
+  .common-banner-label {
+    font-size: 8px;
+    gap: 5px;
+  }
+
+  .common-banner-content h1 {
+    font-size: 26px;
+  }
+
+  .common-banner-line {
+    width: 32px;
+    margin-top: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .common-banner-content {
+    animation: none;
+  }
+}
