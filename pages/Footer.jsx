@@ -1,48 +1,44 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import api from "../utils/api";
 import "../styles/Footer.css";
 
+const services = [
+  {
+    _id: "6accb99aa6d948c7dca12813",
+    title: "Web Development",
+  },
+  {
+    _id: "6accb99aa6d948c7dca12814",
+    title: "Mobile App Development",
+  },
+  {
+    _id: "6accb99aa6d948c7dca12816",
+    title: "UI/UX Design",
+  },
+  {
+    _id: "6accb99aa6d948c7dca12819",
+    title: "Cloud Solutions & DevOps",
+  },
+  {
+    _id: "6accb99aa6d948c7dca1281a",
+    title: "AI & Data Solutions",
+  },
+  {
+    _id: "6accb99aa6d948c7dca1281c",
+    title: "Cybersecurity",
+  },
+];
+
 const Footer = () => {
-  const [services, setServices] = useState([]);
-
-  useEffect(() => {
-    const fetchServices = async () => {
-      try {
-        const response = await api.get("/services");
-        const servicesData = response.data.services || [];
-        const importantServices = [
-          "Web Development",
-          "Mobile App Development",
-          "UI/UX Design",
-          "Cloud Solutions & DevOps",
-          "AI & Data Solutions",
-          "Cybersecurity",
-        ];
-
-        const filteredServices = importantServices
-          .map((title) =>
-            servicesData.find(
-              (service) => service.title?.toLowerCase() === title.toLowerCase(),
-            ),
-          )
-          .filter(Boolean);
-        setServices(filteredServices);
-      } catch (error) {
-        console.error("Error fetching footer services:", error);
-      }
-    };
-
-    fetchServices();
-  }, []);
-
   return (
     <footer className="footer-main">
       <div className="footer-container">
+        {/* Company */}
         <div className="footer-company">
           <Link to="/" className="footer-logo">
             <span>IT Company</span>
           </Link>
+
           <p className="footer-company-text">
             We provide innovative IT and digital solutions that help businesses
             grow, transform, and succeed in a digital world.
@@ -87,22 +83,21 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* IT Services */}
         <div className="footer-column">
           <h3 className="footer-heading">IT Services</h3>
 
-          {services.length > 0 ? (
-            services.map((service) => (
-              <Link key={service._id} to={`/servicedetails/${service._id}`}>
-                {service.title}
-              </Link>
-            ))
-          ) : (
-            <span className="footer-loading">Loading services...</span>
-          )}
+          {services.map((service) => (
+            <Link key={service._id} to={`/servicedetails/${service._id}`}>
+              {service.title}
+            </Link>
+          ))}
         </div>
 
+        {/* Company Links */}
         <div className="footer-column">
           <h3 className="footer-heading">Company</h3>
+
           <Link to="/">Home</Link>
           <Link to="/about">About Us</Link>
           <Link to="/team">Our Team</Link>
@@ -112,6 +107,7 @@ const Footer = () => {
           <Link to="/contact">Contact Us</Link>
         </div>
 
+        {/* Contact Details */}
         <div className="footer-column footer-contact">
           <h3 className="footer-heading">Contact Details</h3>
 
@@ -145,6 +141,7 @@ const Footer = () => {
         </div>
       </div>
 
+      {/* Footer Bottom */}
       <div className="footer-bottom">
         <p className="footer-copyright">
           © {new Date().getFullYear()} IT Company. All Rights Reserved.

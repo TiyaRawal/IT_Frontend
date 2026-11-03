@@ -1,76 +1,209 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link, useParams } from "react-router-dom";
 import "../styles/CapabilityDetail.css";
-import api from "../utils/api";
+
+// ==================== CAPABILITIES DATA ====================
+
+const capabilities = [
+  {
+    _id: "6acc9dfaa6d948c7dca1280b",
+    title: "Strategy & Planning",
+    subtitle: "Build a Clear Path to Digital Success",
+    description:
+      "We help businesses define their technology direction, plan projects effectively, and make informed decisions that support long-term growth.",
+    icon: "fa-solid fa-lightbulb",
+    services: [
+      {
+        title: "Business & Requirement Analysis",
+        description:
+          "Understand business goals, identify challenges, and define clear project requirements.",
+        icon: "fa-solid fa-bullseye",
+      },
+      {
+        title: "Technology Consulting",
+        description:
+          "Choose suitable technologies and practical solutions for your business needs.",
+        icon: "fa-solid fa-compass",
+      },
+      {
+        title: "Project Planning",
+        description:
+          "Create structured roadmaps, define milestones, and plan project execution.",
+        icon: "fa-solid fa-list-check",
+      },
+      {
+        title: "Solution Architecture",
+        description:
+          "Plan scalable and maintainable systems that support future business growth.",
+        icon: "fa-solid fa-sitemap",
+      },
+    ],
+  },
+  {
+    _id: "6acc9dfaa6d948c7dca1280c",
+    title: "Custom Development",
+    subtitle: "Digital Products Built Around Your Needs",
+    description:
+      "We develop customized digital solutions designed around your business requirements, user expectations, and long-term objectives.",
+    icon: "fa-solid fa-code",
+    services: [
+      {
+        title: "Web Application Development",
+        description:
+          "Build responsive and user-friendly web applications for different business needs.",
+        icon: "fa-solid fa-laptop-code",
+      },
+      {
+        title: "Custom Software Solutions",
+        description:
+          "Develop software tailored to your specific workflows and business processes.",
+        icon: "fa-solid fa-gears",
+      },
+      {
+        title: "API Development & Integration",
+        description:
+          "Connect applications and services through reliable API integrations.",
+        icon: "fa-solid fa-plug",
+      },
+      {
+        title: "Database Solutions",
+        description:
+          "Organize and manage application data with suitable database solutions.",
+        icon: "fa-solid fa-database",
+      },
+    ],
+  },
+  {
+    _id: "6acc9dfaa6d948c7dca1280d",
+    title: "Digital Transformation",
+    subtitle: "Modernize the Way Your Business Works",
+    description:
+      "We help businesses improve existing systems, streamline operations, and adopt modern technologies to work more efficiently.",
+    icon: "fa-solid fa-arrows-rotate",
+    services: [
+      {
+        title: "Process Automation",
+        description:
+          "Reduce repetitive manual work and improve operational efficiency.",
+        icon: "fa-solid fa-robot",
+      },
+      {
+        title: "System Modernization",
+        description:
+          "Improve existing applications and workflows to meet changing requirements.",
+        icon: "fa-solid fa-display",
+      },
+      {
+        title: "Cloud Solutions",
+        description:
+          "Explore cloud-based approaches for flexible and scalable operations.",
+        icon: "fa-solid fa-cloud",
+      },
+      {
+        title: "Digital Optimization",
+        description:
+          "Identify opportunities to improve performance, usability, and workflows.",
+        icon: "fa-solid fa-chart-line",
+      },
+    ],
+  },
+  {
+    _id: "6acc9dfaa6d948c7dca1280e",
+    title: "Support & Maintenance",
+    subtitle: "Keep Your Digital Solutions Running Smoothly",
+    description:
+      "We help maintain the reliability, security, and performance of digital applications through ongoing technical support and improvements.",
+    icon: "fa-solid fa-headset",
+    services: [
+      {
+        title: "Technical Support",
+        description:
+          "Assist with technical issues and help keep applications functioning properly.",
+        icon: "fa-solid fa-headset",
+      },
+      {
+        title: "Bug Fixes & Improvements",
+        description:
+          "Identify application issues and implement necessary fixes and enhancements.",
+        icon: "fa-solid fa-bug",
+      },
+      {
+        title: "Security Updates",
+        description:
+          "Help keep software updated and address identified security concerns.",
+        icon: "fa-solid fa-shield-halved",
+      },
+      {
+        title: "Performance Monitoring",
+        description:
+          "Review application performance and identify areas for improvement.",
+        icon: "fa-solid fa-gauge-high",
+      },
+    ],
+  },
+];
+
+// ==================== SERVICES DATA ====================
+
+const servicesList = [
+  {
+    _id: "6accb99aa6d948c7dca12813",
+    title: "Web Development",
+  },
+  {
+    _id: "6accb99aa6d948c7dca12814",
+    title: "Mobile App Development",
+  },
+  {
+    _id: "6accb99aa6d948c7dca12815",
+    title: "Custom Software Development",
+  },
+  {
+    _id: "6accb99aa6d948c7dca12816",
+    title: "UI/UX Design",
+  },
+  {
+    _id: "6accb99aa6d948c7dca12817",
+    title: "E-Commerce Development",
+  },
+  {
+    _id: "6accb99aa6d948c7dca12818",
+    title: "Technology Consulting",
+  },
+  {
+    _id: "6accb99aa6d948c7dca12819",
+    title: "Cloud Solutions & DevOps",
+  },
+  {
+    _id: "6accb99aa6d948c7dca1281a",
+    title: "AI & Data Solutions",
+  },
+  {
+    _id: "6accb99aa6d948c7dca1281b",
+    title: "Software Testing & QA",
+  },
+  {
+    _id: "6accb99aa6d948c7dca1281c",
+    title: "Cybersecurity",
+  },
+  {
+    _id: "6accb99aa6d948c7dca1281d",
+    title: "Website Maintenance & Support",
+  },
+];
+
+// ==================== COMPONENT ====================
 
 const CapabilityDetail = () => {
   const { id } = useParams();
-  const [capability, setCapability] = useState(null);
-  const [servicesList, setServicesList] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
 
-  useEffect(() => {
-    let active = true;
+  const capability = capabilities.find((item) => item._id === id);
 
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        setError("");
-        const [capabilityResponse, servicesResponse] = await Promise.all([
-          api.get(`/capabilities/${id}`),
-          api.get("/services"),
-        ]);
-
-        if (!active) return;
-
-        if (
-          capabilityResponse.data.success &&
-          capabilityResponse.data.capability
-        ) {
-          setCapability(capabilityResponse.data.capability);
-        } else {
-          setError(capabilityResponse.data.message || "Capability Not Found");
-        }
-
-        if (servicesResponse.data.success) {
-          setServicesList(servicesResponse.data.services || []);
-        }
-      } catch (err) {
-        if (!active) return;
-        setError(
-          err.response?.data?.message || "Unable to load capability details.",
-        );
-      } finally {
-        if (active) setLoading(false);
-      }
-    };
-
-    if (id) {
-      fetchData();
-    } else {
-      setLoading(false);
-      setError("Capability ID is missing.");
-    }
-    return () => {
-      active = false;
-    };
-  }, [id]);
-
-  if (loading) {
-    return (
-      <div className="capability-status">
-        <div className="capability-loader"></div>
-        <p>Loading capability details...</p>
-      </div>
-    );
-  }
-
-  if (error || !capability) {
+  if (!capability) {
     return (
       <div className="capability-status">
         <h2>Capability Not Found</h2>
-        <p>{error || "No capability details are available."}</p>
+        <p>No capability details are available.</p>
 
         <Link to="/" className="capability-primary-btn">
           Back to Home
@@ -81,8 +214,10 @@ const CapabilityDetail = () => {
   }
 
   const title = capability.title || capability.name || "Our Capability";
+
   const subtitle =
     capability.subtitle || "Technology solutions designed around your needs.";
+
   const description =
     capability.description || "Explore our capabilities and solutions.";
 
@@ -90,30 +225,33 @@ const CapabilityDetail = () => {
     ? capability.services
     : [];
 
+  // Match capability expertise with service details
+
+  const titleToService = {
+    "Business & Requirement Analysis": "Technology Consulting",
+    "Technology Consulting": "Technology Consulting",
+    "Project Planning": "Technology Consulting",
+    "Solution Architecture": "Technology Consulting",
+
+    "Web Application Development": "Web Development",
+    "Custom Software Solutions": "Custom Software Development",
+    "API Development & Integration": "Web Development",
+    "Database Solutions": "Web Development",
+
+    "Process Automation": "AI & Data Solutions",
+    "System Modernization": "Custom Software Development",
+    "Cloud Solutions": "Cloud Solutions & DevOps",
+    "Digital Optimization": "Cloud Solutions & DevOps",
+
+    "Technical Support": "Website Maintenance & Support",
+    "Bug Fixes & Improvements": "Website Maintenance & Support",
+    "Security Updates": "Cybersecurity",
+    "Performance Monitoring": "Website Maintenance & Support",
+  };
+
   const getMatchingService = (expertiseTitle) => {
-    const titleToService = {
-      "Business & Requirement Analysis": "Technology Consulting",
-      "Technology Consulting": "Technology Consulting",
-      "Project Planning": "Technology Consulting",
-      "Solution Architecture": "Technology Consulting",
-
-      "Web Application Development": "Web Development",
-      "Custom Software Solutions": "Custom Software Development",
-      "API Development & Integration": "Web Development",
-      "Database Solutions": "Web Development",
-
-      "Process Automation": "AI & Data Solutions",
-      "System Modernization": "Custom Software Development",
-      "Cloud Solutions": "Cloud Solutions & DevOps",
-      "Digital Optimization": "Cloud Solutions & DevOps",
-
-      "Technical Support": "Website Maintenance & Support",
-      "Bug Fixes & Improvements": "Website Maintenance & Support",
-      "Security Updates": "Cybersecurity",
-      "Performance Monitoring": "Website Maintenance & Support",
-    };
-
     const mappedTitle = titleToService[expertiseTitle];
+
     if (!mappedTitle) return null;
 
     return servicesList.find(
@@ -123,12 +261,17 @@ const CapabilityDetail = () => {
 
   return (
     <main className="capability-detail-page">
+      {/* HERO SECTION */}
+
       <section className="capability-hero">
         <div className="capability-hero-container">
           <div className="capability-hero-content">
             <span className="capability-label">OUR CAPABILITIES</span>
+
             <h1>{title}</h1>
+
             <h2>{subtitle}</h2>
+
             <p className="capability-hero-description">{description}</p>
 
             <Link to="/contact" className="capability-primary-btn">
@@ -147,7 +290,9 @@ const CapabilityDetail = () => {
               </div>
 
               <h3>{title}</h3>
+
               <p>Practical solutions. Meaningful results.</p>
+
               <div className="capability-visual-divider"></div>
 
               <div className="capability-visual-bottom">
@@ -158,13 +303,17 @@ const CapabilityDetail = () => {
         </div>
       </section>
 
+      {/* CAPABILITY SERVICES */}
+
       <section className="capability-services">
         <div className="capability-services-container">
           <div className="capability-section-heading">
             <span className="capability-label">WHAT WE OFFER</span>
+
             <h2>
               Our <span>{title}</span> Services
             </h2>
+
             <p>
               Explore the services and solutions available for your business
               requirements.
@@ -178,6 +327,7 @@ const CapabilityDetail = () => {
                   typeof service === "string"
                     ? service
                     : service.title || service.name || "Our Service";
+
                 const serviceDescription =
                   typeof service === "string" ? "" : service.description || "";
 
@@ -187,6 +337,7 @@ const CapabilityDetail = () => {
                     : service.icon || "fa-solid fa-check";
 
                 const matchingService = getMatchingService(serviceTitle);
+
                 const serviceId =
                   matchingService?._id ||
                   (typeof service === "object"
@@ -201,9 +352,11 @@ const CapabilityDetail = () => {
                     <div className="capability-service-icon">
                       <i className={serviceIcon}></i>
                     </div>
+
                     <h3>{serviceTitle}</h3>
 
                     {serviceDescription && <p>{serviceDescription}</p>}
+
                     {serviceId ? (
                       <Link
                         to={`/servicedetails/${serviceId}`}
@@ -234,11 +387,15 @@ const CapabilityDetail = () => {
         </div>
       </section>
 
+      {/* CTA SECTION */}
+
       <section className="capability-cta-section">
         <div className="capability-cta">
           <div className="capability-cta-content">
             <span className="capability-label">LET'S WORK TOGETHER</span>
+
             <h2>Have a Project in Mind?</h2>
+
             <p>
               Let's discuss your requirements and find the right solution for
               your business.

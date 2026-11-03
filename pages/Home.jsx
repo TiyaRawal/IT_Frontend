@@ -2,7 +2,198 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Home.css";
 import "../styles/Services.css";
-import api from "../utils/api";
+
+// ==================== STATIC DATA ====================
+
+const capabilities = [
+  {
+    _id: "6acc9dfaa6d948c7dca1280b",
+    title: "Strategy & Planning",
+    subtitle: "Build a Clear Path to Digital Success",
+    description:
+      "We help businesses define their technology direction, plan projects effectively, and make informed decisions that support long-term growth.",
+    icon: "fa-solid fa-lightbulb",
+  },
+  {
+    _id: "6acc9dfaa6d948c7dca1280c",
+    title: "Custom Development",
+    subtitle: "Digital Products Built Around Your Needs",
+    description:
+      "We develop customized digital solutions designed around your business requirements, user expectations, and long-term objectives.",
+    icon: "fa-solid fa-code",
+  },
+  {
+    _id: "6acc9dfaa6d948c7dca1280d",
+    title: "Digital Transformation",
+    subtitle: "Modernize the Way Your Business Works",
+    description:
+      "We help businesses improve existing systems, streamline operations, and adopt modern technologies to work more efficiently.",
+    icon: "fa-solid fa-arrows-rotate",
+  },
+  {
+    _id: "6acc9dfaa6d948c7dca1280e",
+    title: "Support & Maintenance",
+    subtitle: "Keep Your Digital Solutions Running Smoothly",
+    description:
+      "We help maintain the reliability, security, and performance of digital applications through ongoing technical support and improvements.",
+    icon: "fa-solid fa-headset",
+  },
+];
+
+const services = [
+  {
+    _id: "6accb99aa6d948c7dca12813",
+    title: "Web Development",
+    description:
+      "We build responsive websites and web applications with reliable frontend, backend, API and database integration.",
+    icon: "fa-solid fa-code",
+  },
+  {
+    _id: "6accb99aa6d948c7dca12814",
+    title: "Mobile App Development",
+    description:
+      "We develop user-friendly mobile applications that connect businesses with customers through convenient digital experiences.",
+    icon: "fa-solid fa-mobile-screen-button",
+  },
+  {
+    _id: "6accb99aa6d948c7dca12816",
+    title: "UI/UX Design",
+    description:
+      "We design intuitive interfaces and user journeys that make websites and applications easier to understand and use.",
+    icon: "fa-solid fa-pen-ruler",
+  },
+  {
+    _id: "6accb99aa6d948c7dca12819",
+    title: "Cloud Solutions & DevOps",
+    description:
+      "We help deploy applications, improve delivery workflows and plan flexible cloud infrastructure.",
+    icon: "fa-solid fa-cloud",
+  },
+  {
+    _id: "6accb99aa6d948c7dca1281a",
+    title: "AI & Data Solutions",
+    description:
+      "We help businesses organize data, automate selected workflows and explore practical AI-powered solutions.",
+    icon: "fa-solid fa-brain",
+  },
+  {
+    _id: "6accb99aa6d948c7dca1281c",
+    title: "Cybersecurity",
+    description:
+      "We help identify common application security risks and improve security practices across digital systems.",
+    icon: "fa-solid fa-shield-halved",
+  },
+];
+
+const technologies = [
+  { name: "React", icon: "fa-brands fa-react" },
+  { name: "JavaScript", icon: "fa-brands fa-js" },
+  { name: "Node.js", icon: "fa-brands fa-node-js" },
+  { name: "Express.js", icon: "fa-solid fa-server" },
+  { name: "MongoDB", icon: "fa-solid fa-database" },
+  { name: "Python", icon: "fa-brands fa-python" },
+  { name: "Java", icon: "fa-brands fa-java" },
+  { name: "MySQL", icon: "fa-solid fa-database" },
+  { name: "AWS", icon: "fa-brands fa-aws" },
+  { name: "Docker", icon: "fa-brands fa-docker" },
+  { name: "Git", icon: "fa-brands fa-git-alt" },
+  { name: "Firebase", icon: "fa-solid fa-fire" },
+];
+
+const teamMembers = [
+  {
+    _id: "6ac87b9b31d455edffd21e7c",
+    name: "Rahul Shah",
+    position: "Full Stack Developer",
+    image: "https://i.pravatar.cc/600?img=12",
+  },
+  {
+    _id: "6ac87b9b31d455edffd21e7d",
+    name: "Priya Mehta",
+    position: "UI/UX Designer",
+    image: "https://i.pravatar.cc/600?img=47",
+  },
+  {
+    _id: "6ac87b9b31d455edffd21e7e",
+    name: "Amit Patel",
+    position: "Backend Developer",
+    image: "https://i.pravatar.cc/600?img=11",
+  },
+  {
+    _id: "6ac87b9b31d455edffd21e7f",
+    name: "Neha Shah",
+    position: "Project Manager",
+    image: "https://i.pravatar.cc/600?img=32",
+  },
+  {
+    _id: "6ac87b9b31d455edffd21e80",
+    name: "Karan Patel",
+    position: "Frontend Developer",
+    image: "https://i.pravatar.cc/600?img=13",
+  },
+  {
+    _id: "6ac87b9b31d455edffd21e81",
+    name: "Anjali Shah",
+    position: "QA Engineer",
+    image: "https://i.pravatar.cc/600?img=44",
+  },
+  {
+    _id: "6ac87cfd31d455edffd21e83",
+    name: "Rohan Desai",
+    position: "DevOps Engineer",
+    image: "https://i.pravatar.cc/600?img=68",
+  },
+  {
+    _id: "6ac87cfd31d455edffd21e84",
+    name: "Simran Patel",
+    position: "Data Analyst",
+    image: "https://i.pravatar.cc/600?img=49",
+  },
+  {
+    _id: "6ac87cfd31d455edffd21e85",
+    name: "Dev Mehta",
+    position: "Mobile App Developer",
+    image: "https://i.pravatar.cc/600?img=60",
+  },
+  {
+    _id: "6ac87cfd31d455edffd21e86",
+    name: "Kavya Shah",
+    position: "Digital Marketing Specialist",
+    image: "https://i.pravatar.cc/600?img=45",
+  },
+];
+
+const reviews = [
+  {
+    _id: "6ac8a91131d455edffd21e96",
+    name: "Emily Wilson",
+    position: "Marketing Manager",
+    image: "https://i.pravatar.cc/150?img=47",
+    review:
+      "The team understood our requirements and delivered a professional digital experience with great attention to detail.",
+    rating: 5,
+  },
+  {
+    _id: "6ac8a91131d455edffd21e97",
+    name: "David Miller",
+    position: "Business Owner",
+    image: "https://i.pravatar.cc/150?img=12",
+    review:
+      "Communication was smooth throughout the project, and the solution was built around our business requirements.",
+    rating: 5,
+  },
+  {
+    _id: "6ac8a91131d455edffd21e98",
+    name: "Sophia Brown",
+    position: "Product Manager",
+    image: "https://i.pravatar.cc/150?img=32",
+    review:
+      "The design was clean, the development was well organized, and the overall experience was straightforward.",
+    rating: 4,
+  },
+];
+
+// ==================== HOME ====================
 
 const Home = () => {
   return (
@@ -19,6 +210,8 @@ const Home = () => {
     </div>
   );
 };
+
+// ==================== HOME BANNER ====================
 
 const HomeBanner = () => {
   const banners = [
@@ -57,6 +250,7 @@ const HomeBanner = () => {
     const interval = setInterval(() => {
       setActiveBanner((prev) => (prev + 1) % banners.length);
     }, 5000);
+
     return () => clearInterval(interval);
   }, []);
 
@@ -79,6 +273,7 @@ const HomeBanner = () => {
             {banner.title}
             <span>{banner.highlight}</span>
           </h1>
+
           <p>{banner.description}</p>
 
           <div className="home-banner-buttons">
@@ -96,6 +291,8 @@ const HomeBanner = () => {
     </section>
   );
 };
+
+// ==================== WHY CHOOSE US ====================
 
 const HomeWhyChooseUs = () => {
   const stats = [
@@ -135,12 +332,16 @@ const HomeWhyChooseUs = () => {
     const animate = (currentTime) => {
       const progress = Math.min((currentTime - startTime) / duration, 1);
       const easeOut = 1 - Math.pow(1 - progress, 3);
+
       setCounts(stats.map((stat) => Math.floor(stat.value * easeOut)));
+
       if (progress < 1) {
         animationFrame = requestAnimationFrame(animate);
       }
     };
+
     animationFrame = requestAnimationFrame(animate);
+
     return () => cancelAnimationFrame(animationFrame);
   }, []);
 
@@ -149,14 +350,17 @@ const HomeWhyChooseUs = () => {
       <div className="home-why-container">
         <div className="home-why-content">
           <span className="home-section-label">WHY CHOOSE US</span>
+
           <h2>
             Technology That Creates
             <span>Real Business Impact</span>
           </h2>
+
           <p>
             We combine technology, creativity and business understanding to
             build reliable digital solutions designed around your goals.
           </p>
+
           <Link to="/about" className="home-outline-button">
             Learn More
             <i className="fa-solid fa-arrow-right"></i>
@@ -175,6 +379,7 @@ const HomeWhyChooseUs = () => {
                   {counts[index]}
                   {stat.suffix}
                 </h3>
+
                 <p>{stat.label}</p>
               </div>
             </div>
@@ -185,26 +390,9 @@ const HomeWhyChooseUs = () => {
   );
 };
 
+// ==================== CAPABILITIES ====================
+
 const HomeCapabilities = () => {
-  const [capabilities, setCapabilities] = useState([]);
-
-  useEffect(() => {
-    const getCapabilities = async () => {
-      try {
-        const response = await api.get("/capabilities");
-        if (
-          response.data.success &&
-          Array.isArray(response.data.capabilities)
-        ) {
-          setCapabilities(response.data.capabilities);
-        }
-      } catch (error) {
-        console.error("Error fetching capabilities:", error);
-      }
-    };
-    getCapabilities();
-  }, []);
-
   return (
     <section className="home-capabilities-section">
       <div className="home-capabilities-container">
@@ -215,6 +403,7 @@ const HomeCapabilities = () => {
             Built To Deliver
             <span>Better Digital Solutions</span>
           </h2>
+
           <p>
             From planning and development to support, we provide the expertise
             needed to build technology that works.
@@ -259,28 +448,15 @@ const HomeCapabilities = () => {
   );
 };
 
+// ==================== SERVICES ====================
+
 const HomeServices = () => {
-  const [services, setServices] = useState([]);
-
-  useEffect(() => {
-    const getServices = async () => {
-      try {
-        const response = await api.get("/services");
-        if (response.data.success && Array.isArray(response.data.services)) {
-          setServices(response.data.services.slice(0, 6));
-        }
-      } catch (error) {
-        console.error("Error fetching services:", error);
-      }
-    };
-    getServices();
-  }, []);
-
   return (
     <section className="services-section">
       <div className="services-container">
         <div className="services-header">
           <h2>Services We Provide</h2>
+
           <p>
             We provide professional IT and digital solutions to help individuals
             and businesses grow with reliable technology services.
@@ -288,11 +464,8 @@ const HomeServices = () => {
         </div>
 
         <div className="services-grid">
-          {services.map((service, index) => (
-            <div
-              className="service-card"
-              key={service._id || service.title || index}
-            >
+          {services.map((service) => (
+            <div className="service-card" key={service._id}>
               <span className="service-card-line"></span>
 
               <div className="service-icon">
@@ -302,7 +475,10 @@ const HomeServices = () => {
               <h3>{service.title}</h3>
               <p>{service.description}</p>
 
-              <Link to="/servicedetails" className="service-button">
+              <Link
+                to={`/servicedetails/${service._id}`}
+                className="service-button"
+              >
                 Read More
                 <i className="fa-solid fa-arrow-right"></i>
               </Link>
@@ -314,54 +490,20 @@ const HomeServices = () => {
   );
 };
 
+// ==================== TECHNOLOGIES ====================
+
 const HomeTechnologies = () => {
-  const defaultTechnologies = [
-    { name: "React", icon: "fa-brands fa-react" },
-    { name: "JavaScript", icon: "fa-brands fa-js" },
-    { name: "Node.js", icon: "fa-brands fa-node-js" },
-    { name: "Express.js", icon: "fa-solid fa-server" },
-    { name: "MongoDB", icon: "fa-solid fa-database" },
-    { name: "Python", icon: "fa-brands fa-python" },
-    { name: "Java", icon: "fa-brands fa-java" },
-    { name: "MySQL", icon: "fa-solid fa-database" },
-    { name: "AWS", icon: "fa-brands fa-aws" },
-    { name: "Docker", icon: "fa-brands fa-docker" },
-    { name: "Git", icon: "fa-brands fa-git-alt" },
-    { name: "Firebase", icon: "fa-solid fa-fire" },
-  ];
-
-  const [technologies, setTechnologies] = useState(defaultTechnologies);
-
-  useEffect(() => {
-    const getTechnologies = async () => {
-      try {
-        const response = await api.get("/technologies");
-        if (
-          response.data.success &&
-          Array.isArray(response.data.technologies) &&
-          response.data.technologies.length > 0
-        ) {
-          setTechnologies(response.data.technologies);
-        }
-      } catch (error) {
-        console.error("Error fetching technologies:", error);
-      }
-    };
-    getTechnologies();
-  }, []);
-
   const middleIndex = Math.ceil(technologies.length / 2);
+
   const firstRow = technologies.slice(0, middleIndex);
   const secondRow = technologies.slice(middleIndex);
 
   const renderTechnology = (tech, index, row) => (
-    <div
-      className="home-tech-card"
-      key={`${row}-${tech._id || tech.name}-${index}`}
-    >
+    <div className="home-tech-card" key={`${row}-${tech.name}-${index}`}>
       <div className="home-tech-icon">
         <i className={tech.icon || "fa-solid fa-code"}></i>
       </div>
+
       <span>{tech.name}</span>
     </div>
   );
@@ -376,6 +518,7 @@ const HomeTechnologies = () => {
             Technologies We
             <span>Work With</span>
           </h2>
+
           <p>
             Modern technologies and platforms that help us build scalable,
             secure and high-performing solutions.
@@ -402,38 +545,19 @@ const HomeTechnologies = () => {
   );
 };
 
+// ==================== TEAM ====================
+
 const HomeTeam = () => {
-  const [teamMembers, setTeamMembers] = useState([]);
   const [startIndex, setStartIndex] = useState(0);
-
-  useEffect(() => {
-    const getTeam = async () => {
-      try {
-        const response = await api.get("/team");
-        if (
-          response.data.success &&
-          Array.isArray(response.data.team)
-        ) {
-          setTeamMembers(response.data.team);
-          setStartIndex(0);
-        }
-      } catch (error) {
-        console.error("Error fetching team:", error);
-      }
-    };
-
-    getTeam();
-  }, []);
 
   const visibleMembers = Array.from(
     { length: Math.min(3, teamMembers.length) },
-    (_, index) =>
-      teamMembers[(startIndex + index) % teamMembers.length]
+    (_, index) => teamMembers[(startIndex + index) % teamMembers.length],
   );
 
   const handlePrevious = () => {
     setStartIndex(
-      (prev) => (prev - 1 + teamMembers.length) % teamMembers.length
+      (prev) => (prev - 1 + teamMembers.length) % teamMembers.length,
     );
   };
 
@@ -441,22 +565,20 @@ const HomeTeam = () => {
     setStartIndex((prev) => (prev + 1) % teamMembers.length);
   };
 
-  if (teamMembers.length === 0) {
-    return null;
-  }
-
   return (
     <section className="home-team-section">
       <div className="home-team-container">
         <div className="home-team-header">
           <span className="home-section-label">OUR TEAM</span>
+
           <h2>
             Meet The People
             <span>Behind Our Work</span>
           </h2>
+
           <p>
-            A team of designers, developers and technology professionals
-            working together to build meaningful digital solutions.
+            A team of designers, developers and technology professionals working
+            together to build meaningful digital solutions.
           </p>
         </div>
 
@@ -472,21 +594,15 @@ const HomeTeam = () => {
           )}
 
           <div className="home-team-grid">
-            {visibleMembers.map((member, index) => (
-              <div
-                className="home-team-card"
-                key={member._id || `${member.name}-${index}`}
-              >
+            {visibleMembers.map((member) => (
+              <div className="home-team-card" key={member._id}>
                 <div className="home-team-card-inner">
                   <div className="home-team-card-front">
-                    <img
-                      src={member.image || member.photo}
-                      alt={member.name}
-                    />
+                    <img src={member.image} alt={member.name} />
 
                     <div className="home-team-overlay">
                       <h3>{member.name}</h3>
-                      <p>{member.position || member.role}</p>
+                      <p>{member.position}</p>
                     </div>
                   </div>
 
@@ -497,46 +613,7 @@ const HomeTeam = () => {
                       </div>
 
                       <h3>{member.name}</h3>
-                      <span>{member.position || member.role}</span>
-                      <p>{member.description}</p>
-
-                      {member.skills &&
-                        (Array.isArray(member.skills)
-                          ? member.skills.length > 0
-                          : member.skills.trim() !== "") && (
-                          <div className="home-team-skills">
-                            <i className="fa-solid fa-code"></i>
-                            <span>
-                              {Array.isArray(member.skills)
-                                ? member.skills.join(", ")
-                                : member.skills}
-                            </span>
-                          </div>
-                        )}
-
-                      <div className="home-team-socials">
-                        {member.linkedin && (
-                          <a
-                            href={member.linkedin}
-                            target="_blank"
-                            rel="noreferrer"
-                            aria-label="LinkedIn"
-                          >
-                            <i className="fa-brands fa-linkedin-in"></i>
-                          </a>
-                        )}
-
-                        {member.github && (
-                          <a
-                            href={member.github}
-                            target="_blank"
-                            rel="noreferrer"
-                            aria-label="GitHub"
-                          >
-                            <i className="fa-brands fa-github"></i>
-                          </a>
-                        )}
-                      </div>
+                      <span>{member.position}</span>
                     </div>
                   </div>
                 </div>
@@ -564,51 +641,41 @@ const HomeTeam = () => {
   );
 };
 
+// ==================== CLIENT REVIEWS ====================
+
 const HomeReviews = () => {
-  const [reviews, setReviews] = useState([]);
   const [activeReview, setActiveReview] = useState(0);
 
   useEffect(() => {
-    const getReviews = async () => {
-      try {
-        const response = await api.get("/reviews");
-        if (response.data.success && Array.isArray(response.data.reviews)) {
-          setReviews(response.data.reviews);
-          setActiveReview(0);
-        }
-      } catch (error) {
-        console.error("Error fetching reviews:", error);
-      }
-    };
-    getReviews();
-  }, []);
-
-  useEffect(() => {
     if (reviews.length <= 1) return;
+
     const interval = setInterval(() => {
       setActiveReview((prev) => (prev + 1) % reviews.length);
     }, 5000);
-    return () => clearInterval(interval);
-  }, [reviews.length]);
 
-  const review = reviews[activeReview % (reviews.length || 1)];
+    return () => clearInterval(interval);
+  }, []);
+
+  const review = reviews[activeReview];
 
   return (
     <section className="home-reviews-section">
       <div className="home-reviews-container">
         <div className="home-reviews-header">
           <span className="home-section-label">CLIENT REVIEWS</span>
+
           <h2>What Our Clients Say</h2>
+
           <p>
             Real feedback from clients who trusted us to turn their ideas into
             digital solutions.
           </p>
         </div>
 
-        {review ? (
+        {review && (
           <div className="home-review-card" key={activeReview}>
             <div className="home-review-image">
-              <img src={review.image || review.photo} alt={review.name} />
+              <img src={review.image} alt={review.name} />
             </div>
 
             <div className="home-review-quote">
@@ -616,25 +683,20 @@ const HomeReviews = () => {
             </div>
 
             <p className="home-review-text">"{review.review}"</p>
+
             <h3>{review.name}</h3>
-            <span>{review.position || review.role}</span>
+            <span>{review.position}</span>
 
             <div className="home-review-stars">
               {[1, 2, 3, 4, 5].map((star) => (
-                <i className="fa-solid fa-star" key={star}></i>
+                <i
+                  className={`fa-solid fa-star ${
+                    star > review.rating ? "review-star-empty" : ""
+                  }`}
+                  key={star}
+                ></i>
               ))}
             </div>
-          </div>
-        ) : (
-          <div className="home-review-card">
-            <div className="home-review-quote">
-              <i className="fa-solid fa-quote-left"></i>
-            </div>
-
-            <h3>Client Reviews Coming Soon</h3>
-            <p className="home-review-text">
-              Client feedback will appear here once it is available.
-            </p>
           </div>
         )}
       </div>

@@ -1,9 +1,9 @@
 import React, { useState, useRef } from "react";
 import { useLocation } from "react-router-dom";
-import api from "../utils/api";
 import "../styles/ApplyNow.css";
 
 const MAX_RESUME_SIZE = 5 * 1024 * 1024;
+
 const ALLOWED_TYPES = [
   "application/pdf",
   "application/msword",
@@ -13,8 +13,10 @@ const ALLOWED_TYPES = [
 const ApplyNow = () => {
   const location = useLocation();
   const resumeInputRef = useRef(null);
+
   const params = new URLSearchParams(location.search);
   const position = params.get("position") || "Open Position";
+
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -27,6 +29,7 @@ const ApplyNow = () => {
   });
 
   const [submitting, setSubmitting] = useState(false);
+
   const [feedback, setFeedback] = useState({
     type: "",
     message: "",
@@ -37,23 +40,29 @@ const ApplyNow = () => {
 
     if (name === "resume") {
       const file = files?.[0];
+
       if (!file) return;
+
       if (!ALLOWED_TYPES.includes(file.type)) {
         setFormData((prev) => ({ ...prev, resume: null }));
+
         setFeedback({
           type: "error",
           message: "Please upload a PDF, DOC or DOCX resume.",
         });
+
         e.target.value = "";
         return;
       }
 
       if (file.size > MAX_RESUME_SIZE) {
         setFormData((prev) => ({ ...prev, resume: null }));
+
         setFeedback({
           type: "error",
           message: "Resume size must not exceed 5 MB.",
         });
+
         e.target.value = "";
         return;
       }
@@ -71,9 +80,11 @@ const ApplyNow = () => {
     setFeedback({ type: "", message: "" });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+
     if (submitting) return;
+
     if (!formData.resume) {
       setFeedback({
         type: "error",
@@ -93,67 +104,14 @@ const ApplyNow = () => {
     setSubmitting(true);
     setFeedback({ type: "", message: "" });
 
-    try {
-      const file = formData.resume;
-      const resumeData = await new Promise((resolve, reject) => {
-        const reader = new FileReader();
+    // Frontend-only demo: no API, email or database submission.
+    setFeedback({
+      type: "success",
+      message:
+        "Form validated successfully! This is a demo form; your application has not been sent or saved.",
+    });
 
-        reader.onload = () => {
-          if (typeof reader.result !== "string") {
-            reject(new Error("Unable to read your resume."));
-            return;
-          }
-          resolve(reader.result.split(",")[1]);
-        };
-
-        reader.onerror = () => {
-          reject(new Error("Unable to read your resume."));
-        };
-        reader.readAsDataURL(file);
-      });
-
-      const applicationData = {
-        ...formData,
-        resume: {
-          filename: file.name,
-          contentType: file.type,
-          data: resumeData,
-        },
-      };
-
-      const response = await api.post("/apply", applicationData);
-
-      setFeedback({
-        type: "success",
-        message:
-          response.data.message ||
-          "Your application has been submitted successfully!",
-      });
-
-      setFormData({
-        fullName: "",
-        email: "",
-        phone: "",
-        experience: "",
-        position,
-        portfolio: "",
-        coverLetter: "",
-        resume: null,
-      });
-
-      if (resumeInputRef.current) {
-        resumeInputRef.current.value = "";
-      }
-    } catch (error) {
-      setFeedback({
-        type: "error",
-        message:
-          error.response?.data?.message ||
-          "Unable to submit your application. Please try again.",
-      });
-    } finally {
-      setSubmitting(false);
-    }
+    setSubmitting(false);
   };
 
   return (
@@ -386,6 +344,7 @@ const ApplyNow = () => {
                   </strong>
                   <span>PDF, DOC or DOCX • Max 5MB</span>
                 </div>
+
                 <i className="fa-solid fa-arrow-up-from-bracket apply-upload-arrow"></i>
               </label>
             </div>
@@ -423,6 +382,7 @@ const ApplyNow = () => {
                 <i className="fa-solid fa-lock"></i>
                 Your information is kept confidential.
               </p>
+
               <button
                 type="submit"
                 className="apply-submit-button"

@@ -1,49 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link, useParams } from "react-router-dom";
-import api from "../utils/api";
+import { articles } from "./Blog";
 import "../styles/BlogDetail.css";
 import CommonBanner from "./CommonBanner";
 
 function BlogDetail() {
   const { id } = useParams();
-  const [article, setArticle] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
 
-  useEffect(() => {
-    const fetchArticle = async () => {
-      try {
-        setLoading(true);
-        setError("");
-        setArticle(null);
-
-        const response = await api.get(`/blogs/${id}`);
-        if (response.data.success && response.data.blog) {
-          setArticle(response.data.blog);
-        } else {
-          setError("Blog article not found.");
-        }
-      } catch (err) {
-        setError(
-          err.response?.status === 404
-            ? "This article could not be found."
-            : "Unable to load the article. Please try again.",
-        );
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (id) {
-      fetchArticle();
-    } else {
-      setError("Invalid blog article.");
-      setLoading(false);
-    }
-  }, [id]);
+  const article = articles.find((item) => item._id === id);
 
   const getParagraphs = (content) => {
     if (!content) return [];
+
     return content
       .split(/\n{2,}/)
       .map((paragraph) => paragraph.trim())
@@ -59,10 +27,12 @@ function BlogDetail() {
           <h3 className="blog-detail-content-heading">
             {match[1].replace(/[.:]+$/, "")}
           </h3>
+
           {match[2] && <p>{match[2]}</p>}
         </>
       );
     }
+
     return <p>{paragraph.replace(/\*\*(.*?)\*\*/g, "$1")}</p>;
   };
 
@@ -73,21 +43,15 @@ function BlogDetail() {
       <CommonBanner title="Blog Details" />
 
       <main className="blog-detail-page">
-        {loading ? (
-          <div className="blog-detail-state">
-            <span className="blog-detail-loader" />
-            <h2>Loading article...</h2>
-            <p>Please wait while we fetch the article.</p>
-          </div>
-        ) : error ? (
+        {!article ? (
           <div className="blog-detail-state">
             <h2>Article unavailable</h2>
-            <p>{error}</p>
+            <p>This article could not be found.</p>
             <Link to="/blog" className="blog-detail-button">
               Back to Blog
             </Link>
           </div>
-        ) : article ? (
+        ) : (
           <article className="blog-detail-article">
             <div className="blog-detail-topbar">
               <Link to="/blog" className="blog-detail-back">
@@ -103,7 +67,9 @@ function BlogDetail() {
               {article.category && (
                 <span className="blog-detail-category">{article.category}</span>
               )}
+
               <h1>{article.title}</h1>
+
               {article.description && (
                 <p className="blog-detail-description">{article.description}</p>
               )}
@@ -123,7 +89,9 @@ function BlogDetail() {
 
               <div className="blog-detail-feature-content">
                 <span className="blog-detail-feature-label">A CLOSER LOOK</span>
+
                 <h2>{article.title}</h2>
+
                 <p>
                   {article.description ||
                     "Explore the ideas and insights behind this topic."}
@@ -156,7 +124,9 @@ function BlogDetail() {
                 <span className="blog-detail-footer-kicker">
                   KEEP EXPLORING
                 </span>
+
                 <h2>There is more to discover.</h2>
+
                 <p>
                   Read more ideas, perspectives and insights from our company
                   journal.
@@ -168,7 +138,7 @@ function BlogDetail() {
               </Link>
             </footer>
           </article>
-        ) : null}
+        )}
       </main>
     </>
   );

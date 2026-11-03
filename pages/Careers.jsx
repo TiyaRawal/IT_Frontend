@@ -1,26 +1,77 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "../styles/Careers.css";
 import CommonBanner from "./CommonBanner";
-import api from "../utils/api";
+
+const jobs = [
+  {
+    _id: "6ac8753f31d455edffd21e76",
+    icon: "fa-solid fa-code",
+    title: "Frontend Developer",
+    experience: "Fresher / 0-1 Year",
+    location: "Ahmedabad, Gujarat",
+    type: "Full Time",
+    description:
+      "We are looking for a passionate Frontend Developer to build responsive and user-friendly web applications using modern frontend technologies.",
+    responsibilities: [
+      "Develop responsive and interactive user interfaces.",
+      "Work with React and modern JavaScript.",
+      "Convert UI designs into functional web pages.",
+      "Collaborate with backend developers and designers.",
+    ],
+  },
+  {
+    _id: "6ac8753f31d455edffd21e77",
+    icon: "fa-solid fa-server",
+    title: "Backend Developer",
+    experience: "Fresher / 0-1 Year",
+    location: "Ahmedabad, Gujarat",
+    type: "Full Time",
+    description:
+      "Join our backend team to develop secure, scalable and reliable server-side applications and APIs.",
+    responsibilities: [
+      "Develop REST APIs using Node.js and Express.js.",
+      "Work with databases and server-side logic.",
+      "Implement authentication and secure APIs.",
+      "Collaborate with frontend developers.",
+    ],
+  },
+  {
+    _id: "6ac8753f31d455edffd21e78",
+    icon: "fa-solid fa-pen-ruler",
+    title: "UI/UX Designer",
+    experience: "0-1 Year",
+    location: "Ahmedabad, Gujarat",
+    type: "Full Time",
+    description:
+      "We are looking for a creative UI/UX Designer who can create simple, modern and user-friendly digital experiences.",
+    responsibilities: [
+      "Create clean and user-friendly interfaces.",
+      "Design website and application layouts.",
+      "Work closely with developers.",
+      "Improve user experience through thoughtful design.",
+    ],
+  },
+  {
+    _id: "6ac8753f31d455edffd21e79",
+    icon: "fa-solid fa-laptop-code",
+    title: "MERN Stack Developer",
+    experience: "0-2 Years",
+    location: "Ahmedabad, Gujarat",
+    type: "Full Time",
+    description:
+      "Work across frontend and backend development to build complete web applications using the MERN stack.",
+    responsibilities: [
+      "Develop full-stack web applications.",
+      "Work with React, Node.js and Express.js.",
+      "Build and integrate REST APIs.",
+      "Work with MongoDB and application data.",
+    ],
+  },
+];
 
 const Careers = () => {
   const [openJob, setOpenJob] = useState(null);
-  const [jobs, setJobs] = useState([]);
-
-  const getCareers = async () => {
-    try {
-      const response = await api.get("/careers");
-      if (response.data.success) {
-        setJobs(response.data.careers);
-      }
-    } catch (e) {
-      console.log("Error fetching careers:", e);
-    }
-  };
-
-  useEffect(() => {
-    getCareers();
-  }, []);
 
   const toggleJob = (index) => {
     setOpenJob(openJob === index ? null : index);
@@ -76,7 +127,6 @@ const Careers = () => {
               <div className="career-benefit-icon">
                 <i className="fa-solid fa-chart-line"></i>
               </div>
-
               <h3>Growth & Learning</h3>
               <p>
                 Learn new technologies, improve your skills and grow through
@@ -88,7 +138,6 @@ const Careers = () => {
               <div className="career-benefit-icon">
                 <i className="fa-solid fa-users"></i>
               </div>
-
               <h3>Collaborative Team</h3>
               <p>
                 Work with a supportive team where ideas are shared, knowledge is
@@ -100,7 +149,6 @@ const Careers = () => {
               <div className="career-benefit-icon">
                 <i className="fa-solid fa-lightbulb"></i>
               </div>
-
               <h3>Real Opportunities</h3>
               <p>
                 Get the opportunity to work on practical projects and solve real
@@ -112,7 +160,6 @@ const Careers = () => {
               <div className="career-benefit-icon">
                 <i className="fa-solid fa-handshake"></i>
               </div>
-
               <h3>Supportive Environment</h3>
               <p>
                 Build your confidence while working in an environment that
@@ -140,7 +187,7 @@ const Careers = () => {
                 className={`career-job ${
                   openJob === index ? "career-job-open" : ""
                 }`}
-                key={job._id || index}
+                key={job._id}
               >
                 <div className="career-job-main">
                   <div className="career-job-icon">
@@ -191,13 +238,13 @@ const Careers = () => {
                     </button>
 
                     {openJob !== index && (
-                      <a
-                        href={getApplyUrl(job.title)}
+                      <Link
+                        to={getApplyUrl(job.title)}
                         className="career-apply-button"
                       >
                         Apply Now
                         <i className="fa-solid fa-arrow-right"></i>
-                      </a>
+                      </Link>
                     )}
                   </div>
                 </div>
@@ -216,7 +263,7 @@ const Careers = () => {
                     <div>
                       <h4>Responsibilities</h4>
                       <ul>
-                        {job.responsibilities?.map((item, itemIndex) => (
+                        {job.responsibilities.map((item, itemIndex) => (
                           <li key={itemIndex}>
                             <i className="fa-solid fa-check"></i>
                             {item}
@@ -227,23 +274,17 @@ const Careers = () => {
                   </div>
 
                   <div className="career-job-details-action">
-                    <a
-                      href={getApplyUrl(job.title)}
+                    <Link
+                      to={getApplyUrl(job.title)}
                       className="career-apply-button"
                     >
                       Apply Now
                       <i className="fa-solid fa-arrow-right"></i>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
             ))}
-
-            {jobs.length === 0 && (
-              <p className="career-empty-message">
-                No open positions available right now.
-              </p>
-            )}
           </div>
         </div>
       </section>

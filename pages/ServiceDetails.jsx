@@ -1,56 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link, useParams } from "react-router-dom";
-import api from "../utils/api";
+import { services } from "./Services";
 import "../styles/ServiceDetails.css";
 
 const ServiceDetails = () => {
   const { id } = useParams();
-  const [service, setService] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
 
-  useEffect(() => {
-    const getService = async () => {
-      try {
-        setLoading(true);
-        setError("");
-        const response = await api.get(`/services/${id}`);
-        if (response.data?.success && response.data?.service) {
-          setService(response.data.service);
-        } else {
-          setError("Service details could not be found.");
-        }
-      } catch (err) {
-        console.error("Error fetching service details:", err);
-        setError("Unable to load this service. Please try again later.");
-      } finally {
-        setLoading(false);
-      }
-    };
-    if (id) getService();
-  }, [id]);
+  const service = services.find((item) => item._id === id);
 
-  if (loading) {
+  if (!service) {
     return (
       <section className="service-details-page">
         <div
           className="service-details-container"
           style={{ padding: "100px 0", textAlign: "center" }}
         >
-          <h2>Loading service details...</h2>
-        </div>
-      </section>
-    );
-  }
-
-  if (error || !service) {
-    return (
-      <section className="service-details-page">
-        <div
-          className="service-details-container"
-          style={{ padding: "100px 0", textAlign: "center" }}
-        >
-          <h2>{error || "Service not found"}</h2>
+          <h2>Service details could not be found.</h2>
           <Link to="/services" className="service-primary-btn">
             Back to Services
           </Link>
@@ -77,14 +42,18 @@ const ServiceDetails = () => {
               {service.subtitle || service.title}
               {service.subtitle ? null : " for Your Business"}
             </h1>
+
             <p>{service.description}</p>
 
             <div className="service-hero-buttons">
               <Link to="/contact" className="service-primary-btn">
-                Start Your Project <i className="fa-solid fa-arrow-right"></i>
+                Start Your Project
+                <i className="fa-solid fa-arrow-right"></i>
               </Link>
+
               <a href="#service-overview" className="service-secondary-btn">
-                Explore Service <i className="fa-solid fa-chevron-down"></i>
+                Explore Service
+                <i className="fa-solid fa-chevron-down"></i>
               </a>
             </div>
           </div>
@@ -100,6 +69,7 @@ const ServiceDetails = () => {
                     event.currentTarget.style.display = "none";
                   }}
                 />
+
                 <div className="service-image-caption">
                   <i className={service.icon || "fa-solid fa-code"}></i>
                   <span>{service.title}</span>
@@ -113,10 +83,12 @@ const ServiceDetails = () => {
                     <span></span>
                     <span></span>
                   </div>
+
                   <div className="service-browser-url">
                     <i className="fa-solid fa-lock"></i> yourbusiness.com
                   </div>
                 </div>
+
                 <div className="service-browser-content">
                   <div className="service-browser-main">
                     <div className="service-browser-text">
@@ -124,6 +96,7 @@ const ServiceDetails = () => {
                       <h3>{service.title}</h3>
                       <p>{service.subtitle}</p>
                     </div>
+
                     <div className="service-browser-graphic">
                       <div className="service-graphic-circle">
                         <i className={service.icon || "fa-solid fa-code"}></i>
@@ -146,6 +119,7 @@ const ServiceDetails = () => {
                 </span>
               </div>
             </div>
+
             <div className="service-floating-card floating-card-two">
               <i className="fa-solid fa-layer-group"></i>
               <div>
@@ -169,15 +143,18 @@ const ServiceDetails = () => {
                 <i className={service.icon || "fa-solid fa-code"}></i>
               </div>
             )}
+
             <div className="service-overview-image-overlay">
               <div className="service-overview-image-icon">
                 <i className={service.icon || "fa-solid fa-code"}></i>
               </div>
+
               <div>
                 <strong>{service.title}</strong>
                 <span>Built around your business</span>
               </div>
             </div>
+
             <div className="service-overview-image-tag">
               <i className="fa-solid fa-globe"></i>
               <span>{service.capabilityTitle || "Digital Solutions"}</span>
@@ -186,9 +163,11 @@ const ServiceDetails = () => {
 
           <div className="service-overview-content">
             <span className="service-top-label">ABOUT THE SERVICE</span>
+
             <h2>
               {service.overviewTitle || service.subtitle || service.title}
             </h2>
+
             <p>{service.overviewDescription || service.description}</p>
 
             <div className="service-overview-features">
@@ -208,6 +187,7 @@ const ServiceDetails = () => {
                       }
                     ></i>
                   </div>
+
                   <div>
                     <h3>{point.title}</h3>
                     <p>{point.description}</p>
@@ -231,6 +211,7 @@ const ServiceDetails = () => {
                 Explore the key areas and capabilities included in this service.
               </p>
             </div>
+
             <div className="service-expertise-grid">
               {expertise.map((item, index) => (
                 <div
@@ -240,12 +221,14 @@ const ServiceDetails = () => {
                   <div className="expertise-icon">
                     <i className={item.icon || "fa-solid fa-check"}></i>
                   </div>
+
                   <div className="expertise-title">
                     <h3>{item.title}</h3>
                     <div className="expertise-arrow">
                       <i className="fa-solid fa-arrow-up-right"></i>
                     </div>
                   </div>
+
                   <p>{item.description}</p>
                 </div>
               ))}
@@ -267,6 +250,7 @@ const ServiceDetails = () => {
                 project.
               </p>
             </div>
+
             <div className="service-technology-grid">
               {technologies.map((technology, index) => (
                 <div
@@ -295,6 +279,7 @@ const ServiceDetails = () => {
                 your goals.
               </p>
             </div>
+
             <div className="service-process-grid">
               {process.map((step, index) => (
                 <React.Fragment key={`${step.title}-${index}`}>
@@ -311,9 +296,11 @@ const ServiceDetails = () => {
                         }
                       ></i>
                     </div>
+
                     <h3>{step.title}</h3>
                     <p>{step.description}</p>
                   </div>
+
                   {index < process.length - 1 && (
                     <div className="process-arrow">
                       <i className="fa-solid fa-arrow-right"></i>
@@ -333,17 +320,22 @@ const ServiceDetails = () => {
               {service.image && (
                 <img src={service.image} alt={`${service.title} solutions`} />
               )}
+
               <div className="quality-badge">
                 <strong>{focusPoints.length}+</strong>
                 <span>Key Focus Areas</span>
               </div>
             </div>
+
             <div className="service-quality-content">
               <span>WHAT WE FOCUS ON</span>
+
               <h2>
                 Built for Your Goals. <strong>Ready for What's Next.</strong>
               </h2>
+
               <p>{service.description}</p>
+
               <div className="quality-points">
                 {focusPoints.map((point, index) => (
                   <div key={`${point.title}-${index}`}>
@@ -357,6 +349,7 @@ const ServiceDetails = () => {
                         ][index % 4]
                       }
                     ></i>
+
                     <span>
                       <strong>{point.title}</strong>
                       {point.description}
@@ -372,13 +365,17 @@ const ServiceDetails = () => {
       <section className="service-final-cta">
         <div className="service-final-content">
           <span>HAVE A PROJECT IN MIND?</span>
+
           <h2>
             {service.ctaHeading ||
               `Let's Discuss Your ${service.title} Project.`}
           </h2>
+
           <p>{service.ctaDescription || service.description}</p>
+
           <Link to="/contact">
-            Start A Conversation <i className="fa-solid fa-arrow-right"></i>
+            Start A Conversation
+            <i className="fa-solid fa-arrow-right"></i>
           </Link>
         </div>
       </section>
