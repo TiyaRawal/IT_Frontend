@@ -2,8 +2,6 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 import "../styles/CapabilityDetail.css";
 
-// ==================== CAPABILITIES DATA ====================
-
 const capabilities = [
   {
     _id: "6acc9dfaa6d948c7dca1280b",
@@ -143,8 +141,6 @@ const capabilities = [
   },
 ];
 
-// ==================== SERVICES DATA ====================
-
 const servicesList = [
   {
     _id: "6accb99aa6d948c7dca12813",
@@ -192,8 +188,6 @@ const servicesList = [
   },
 ];
 
-// ==================== COMPONENT ====================
-
 const CapabilityDetail = () => {
   const { id } = useParams();
 
@@ -225,9 +219,7 @@ const CapabilityDetail = () => {
     ? capability.services
     : [];
 
-  // Match capability expertise with service details
-
-  const titleToService = {
+    const titleToService = {
     "Business & Requirement Analysis": "Technology Consulting",
     "Technology Consulting": "Technology Consulting",
     "Project Planning": "Technology Consulting",
@@ -261,17 +253,13 @@ const CapabilityDetail = () => {
 
   return (
     <main className="capability-detail-page">
-      {/* HERO SECTION */}
 
       <section className="capability-hero">
         <div className="capability-hero-container">
           <div className="capability-hero-content">
             <span className="capability-label">OUR CAPABILITIES</span>
-
             <h1>{title}</h1>
-
             <h2>{subtitle}</h2>
-
             <p className="capability-hero-description">{description}</p>
 
             <Link to="/contact" className="capability-primary-btn">
@@ -302,8 +290,6 @@ const CapabilityDetail = () => {
           </div>
         </div>
       </section>
-
-      {/* CAPABILITY SERVICES */}
 
       <section className="capability-services">
         <div className="capability-services-container">
@@ -386,8 +372,6 @@ const CapabilityDetail = () => {
           )}
         </div>
       </section>
-
-      {/* CTA SECTION */}
 
       <section className="capability-cta-section">
         <div className="capability-cta">

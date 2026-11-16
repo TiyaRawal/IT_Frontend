@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import "../styles/Home.css";
 import "../styles/Services.css";
 
-// ==================== STATIC DATA ====================
-
 const capabilities = [
   {
     _id: "6acc9dfaa6d948c7dca1280b",
@@ -193,8 +191,6 @@ const reviews = [
   },
 ];
 
-// ==================== HOME ====================
-
 const Home = () => {
   return (
     <div className="home">
@@ -210,8 +206,6 @@ const Home = () => {
     </div>
   );
 };
-
-// ==================== HOME BANNER ====================
 
 const HomeBanner = () => {
   const banners = [
@@ -291,8 +285,6 @@ const HomeBanner = () => {
     </section>
   );
 };
-
-// ==================== WHY CHOOSE US ====================
 
 const HomeWhyChooseUs = () => {
   const stats = [
@@ -390,8 +382,6 @@ const HomeWhyChooseUs = () => {
   );
 };
 
-// ==================== CAPABILITIES ====================
-
 const HomeCapabilities = () => {
   return (
     <section className="home-capabilities-section">
@@ -448,8 +438,6 @@ const HomeCapabilities = () => {
   );
 };
 
-// ==================== SERVICES ====================
-
 const HomeServices = () => {
   return (
     <section className="services-section">
@@ -489,8 +477,6 @@ const HomeServices = () => {
     </section>
   );
 };
-
-// ==================== TECHNOLOGIES ====================
 
 const HomeTechnologies = () => {
   const middleIndex = Math.ceil(technologies.length / 2);
@@ -544,8 +530,6 @@ const HomeTechnologies = () => {
     </section>
   );
 };
-
-// ==================== TEAM ====================
 
 const HomeTeam = () => {
   const [startIndex, setStartIndex] = useState(0);
@@ -640,8 +624,6 @@ const HomeTeam = () => {
     </section>
   );
 };
-
-// ==================== CLIENT REVIEWS ====================
 
 const HomeReviews = () => {
   const [activeReview, setActiveReview] = useState(0);

@@ -33,7 +33,6 @@ const Footer = () => {
   return (
     <footer className="footer-main">
       <div className="footer-container">
-        {/* Company */}
         <div className="footer-company">
           <Link to="/" className="footer-logo">
             <span>IT Company</span>
@@ -83,7 +82,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* IT Services */}
         <div className="footer-column">
           <h3 className="footer-heading">IT Services</h3>
 
@@ -94,7 +92,6 @@ const Footer = () => {
           ))}
         </div>
 
-        {/* Company Links */}
         <div className="footer-column">
           <h3 className="footer-heading">Company</h3>
 
@@ -107,7 +104,6 @@ const Footer = () => {
           <Link to="/contact">Contact Us</Link>
         </div>
 
-        {/* Contact Details */}
         <div className="footer-column footer-contact">
           <h3 className="footer-heading">Contact Details</h3>
 
@@ -141,7 +137,6 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Footer Bottom */}
       <div className="footer-bottom">
         <p className="footer-copyright">
           © {new Date().getFullYear()} IT Company. All Rights Reserved.
